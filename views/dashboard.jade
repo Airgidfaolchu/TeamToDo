@@ -1,0 +1,46 @@
+extends layout
+
+block content
+  body(onload='document.newProjectForm.project.focus();')
+    a(href='./') 
+      h1= title
+     
+    h2 Dashboard
+
+    .container
+      ul
+        for project in projectsArray
+          li
+            .form-group2
+              form(action='/editProject', onsubmit='return onEditProject(this)')
+                a(class='projectNames', href='/projectsNames?id=#{project._id}') 
+                  input(type='text', name='projectField', value='#{project.name}', readonly).readonly
+                  input(type='hidden', name='id', value='#{project._id}')
+                button(type='submit', name='submit', value='edit')#edit
+                  big EDIT
+                button(type='button')
+                  a(href='deleteProject?id=#{project._id}')
+                    big DELETE
+
+    .container
+      form(name='newProjectForm', action='/addProject', method='POST')
+        .form-group
+          label Project Name:
+          input(type='text', name='project')
+          button(type='submit', name='submit', value='Add') 
+            big ADD
+    .buttonHolder
+      a(href='/')
+        button(type='submit' id='loBtn') 
+          big LOGOUT
+      a(href='/profile')
+        button(type='submit' id='prBtn') 
+          big PROFILE
+    .footer
+      hr
+      p
+       | A Web App by
+       a(href='http://feedhenry.com') &nbsp; FeedHenry
+       | .  
+
+

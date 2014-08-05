@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  a(href='/') 
+    h1= title
+   
+  h2 Signup
+
+  .container
+    form(form action="/signup" method="post")
+      .form-group
+        label Email:
+        input.form(type='text', name='email')
+      .form-group
+        label Password:
+        input.form(type='password', name='password')
+      button(type='submit') Signup
+      p Already have an account?
+        a(href='/login') &nbsp; Login
+  .footer
+    hr
+    p
+     | A Web App by
+     a(href='http://feedhenry.com') &nbsp; FeedHenry
+     | . 

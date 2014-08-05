@@ -1,0 +1,30 @@
+extends layout
+
+block content
+		a(href='./') 
+			h1= title
+
+		h2 Profile
+
+		.container
+			p ID:
+				#{user._id}
+				#{user.facebook.name}
+				#{user.twitter.id}
+				#{user.google.name}
+			a(href='unlink/local')
+				button(type='submit') 
+					big UNLINK
+		.buttonHolder
+			a(href='/')
+				button(type='submit' id='loBtn') 
+					big LOGOUT
+			a(href='/dashboard')
+				button(type='submit' id='daBtn') 
+					big DASHBOARD
+		.footer
+			hr
+			p
+				| A Web App by
+				a(href='http://feedhenry.com') &nbsp; FeedHenry
+				| .  

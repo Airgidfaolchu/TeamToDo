@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    - var title = title || "Team ToDo"
+    title #{title}
+    //Link to CSS
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+    // Link to JQuery
+    script(src='javascripts/jquery-1.11.0.min.js')
+
+    // Link to JS file
+    script(src='javascripts/script.js')
+
+  body
+    block content

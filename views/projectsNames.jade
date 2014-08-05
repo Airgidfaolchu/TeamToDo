@@ -1,0 +1,46 @@
+extends layout
+
+block content
+	body(onload='document.newTaskForm.task.focus();')
+
+		a(href='./') 
+			h1= title
+
+		h2 Task list
+
+		.container
+
+			ul 
+				for task in tasksArray
+					li 
+						form(action='/editTask', onsubmit='return onEditTask(this)')
+							.form-group2
+								input(type='text', name='taskField', value='#{task.task}', readonly).readonly
+								input(type='hidden', name='id', value='#{task._id}')
+								button(type='submit', name='submit', value='edit')#edit
+									big EDIT
+								button(type='button')
+									a(href='deleteTask?id=#{task._id}')
+										big DELETE
+		.container
+			form(name='newTaskForm', action='/addTask', method='POST')
+				.form-group
+					input(type='text', name='task')
+					button(type='submit', name='submit', value='Add')
+						big ADD
+		.buttonHolder
+			a(href='/')
+				button(type='submit' id='loBtn') 
+					big LOGOUT
+			a(href='/dashboard')
+				button(type='submit' id='daBtn') 
+					big DASHBOARD
+			a(href='/profile')
+				button(type='submit' id='prBtn') 
+					big PROFILE
+		.footer
+			hr
+			p
+				| A Web App by
+				a(href='http://atondigi.com') &nbsp; Aton Digital Media
+				| .  

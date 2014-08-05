@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  a(href='') 
+    h1= title
+   
+  h2 Welcome
+
+  .container
+    a(href='/login')
+      button(type='submit' id='liBtn') Login
+    a(a href='auth/facebook')
+      button(type='submit' id='fbBtn') Facebook
+    a(a href='auth/google')
+      button(type='submit' id='gpBtn') Google+
+    a(a href='auth/twitter')
+      button(type='submit' id='twBtn') Twitter
+    p Need an account?
+      a(href='/signup') &nbsp; Signup
+  .footer
+    hr
+    p
+     | A Web App by
+     a(href='http://feedhenry.com') &nbsp; FeedHenry
+     | .  
