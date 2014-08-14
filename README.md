@@ -8,12 +8,10 @@ It creats three MongoDB collections:
 2. Tasks
 3. Users
 
-It uses Passport.js for local and social authentication (currently: Facebook, Twitter, Google+).
+Currently supported social authentications: Facebook, Twitter, Google+.
 
 ## Usage
 
-1. Navigate to the project directory, and run **npm install** in the Command-line interface / Terminal
-2. Change MONGODB_URI in app.js to your db's URI.
-3. Start MongoDB by typing mongod.
-4. In a separate Command-line interface / Terminal type **node app.js**
-
+1. Change MONGODB_URI in app.js to your db's URI.
+2. Start MongoDB by typing mongod in the Command-line interface / Terminal.
+3. In a separate Command-line interface / Terminal type **node app.js**

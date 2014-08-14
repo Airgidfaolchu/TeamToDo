@@ -322,6 +322,17 @@ module.exports = function(app, passport) {
             failureRedirect: '/'
         }));
 
+    // salesforce ---------------------------------
+
+    app.get('/auth/forcedotcom', passport.authenticate('forcedotcom'));
+
+    app.get('/auth/forcedotcom/callback',
+        passport.authenticate('forcedotcom', {
+            successRedirect: '/dashboard',
+            failureRedirect: '/'
+        }));
+
+
     // =============================================================================
     // AUTHORIZE (ALREADY LOGGED IN / CONNECTING OTHER SOCIAL ACCOUNT) =============
     // =============================================================================

@@ -19,6 +19,12 @@ var ids = {
 		'clientID' 		: '658711144273-1k265e7hoeilrigmbnj2o45h7t53bmlf.apps.googleusercontent.com',
 		'clientSecret' 	: 'CQpqSZAtvESjjyKW_cczk3c3',
 		'callbackURL' 	: 'http://localhost:8080/auth/google/callback'
+	},
+
+	'forcedotcom' : {
+		'clientID' 		: '3MVG9A_f29uWoVQtasngcsw63V7X0K4s58RnAVHC_OQ3OfVPvqnwgXqID0MS4G8NjnTGGKwEAO6nnrXa8l0CE',
+		'clientSecret' 	: '6866168812093138166',
+		'callbackURL' 	: 'http://localhost:8080/auth/forcedotcom/callback'
 	}
 
 }

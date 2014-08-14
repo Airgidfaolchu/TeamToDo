@@ -26,6 +26,12 @@ var userSchema = mongoose.Schema({
         token        : String,
         email        : String,
         name         : String
+    },
+    forcedotcom           : {
+        id           : String,
+        token        : String,
+        email        : String,
+        name         : String
     }
 
 });

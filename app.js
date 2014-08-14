@@ -22,7 +22,7 @@ var mongo = require('mongodb');
 // Get the MongoClient Object
 var mongoClient = mongo.MongoClient;
 // Connect to the datavase for the projects and tasks collections
-var MONGODB_URI = process.env.CUSTOMCONNSTR_MONGODB_URI || 'mongodb://[YOUR_URI/YOUR_DB';
+var MONGODB_URI = process.env.CUSTOMCONNSTR_MONGODB_URI || 'mongodb://Attila:Hokicsapat@ds031628.mongolab.com:31628/shopping_db_v2';
 
 // Connect to the db. The callback function will be passed two arguments: err - which
 // will contain error information, and db - which will contain a connection to the
@@ -41,7 +41,7 @@ mongoClient.connect(MONGODB_URI, function(err, db) {
 // all environments
 app.set('port', process.env.PORT || 8080);
 app.set('view engine', 'jade');
-app.use(express.favicon());
+app.use(express.favicon(__dirname + '/public/images/favicon.ico')); 
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.cookieParser()); // read cookies (needed for auth)

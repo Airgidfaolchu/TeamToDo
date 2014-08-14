@@ -3,6 +3,7 @@ var LocalStrategy    = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy  = require('passport-twitter').Strategy;
 var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
+var ForceDotComStrategy = require('passport-forcedotcom').Strategy;
 
 // load up the user model
 var User = require('../javascripts/user');
@@ -346,5 +347,76 @@ module.exports = function(passport) {
         });
 
     }));
+    // =========================================================================
+    // SALESFORCE ==============================================================
+    // =========================================================================
+    passport.use(new ForceDotComStrategy({
 
+        clientID        : configAuth.forcedotcom.clientID,
+        clientSecret    : configAuth.forcedotcom.clientSecret,
+        //scope: ['id', 'chatter_api'],
+        callbackURL     : configAuth.forcedotcom.callbackURL
+    },     function(req, token, refreshToken, profile, done) {
+
+        // asynchronous
+        process.nextTick(function() {
+
+            // check if the user is already logged in
+            if (!req.user) {
+
+                User.findOne({ 'forcedotcom.id' : profile.id }, function(err, user) {
+           if (err)
+                        return done(err);
+
+                    if (user) {
+
+                        // if there is a user id already but no token (user was linked at one point and then removed)
+                        if (!user.forcedotcom.token) {
+                            user.forcedotcom.token = token;
+                            user.forcedotcom.name  = profile.displayName;
+                            user.forcedotcom.email = profile.emails[0].value; // pull the first email
+
+                            user.save(function(err) {
+                                if (err)
+                                    throw err;
+                                return done(null, user);
+                            });
+                        }
+
+                        return done(null, user);
+                    } else {
+                        var newUser          = new User();
+
+                        newUser.forcedotcom.id    = profile.id;
+                        newUser.forcedotcom.token = token;
+                        newUser.forcedotcom.name  = profile.displayName;
+                        newUser.forcedotcom.email = profile.emails[0].value; // pull the first email
+
+                        newUser.save(function(err) {
+                            if (err)
+                                throw err;
+                            return done(null, newUser);
+                        });
+                    }
+                });
+
+            } else {
+                // user already exists and is logged in, we have to link accounts
+                var user               = req.user; // pull the user out of the session
+
+                user.forcedotcom.id    = profile.id;
+                user.forcedotcom.token = token;
+                user.forcedotcome.name  = profile.displayName;
+                user.forcedotcom.email = profile.emails[0].value; // pull the first email
+
+                user.save(function(err) {
+                    if (err)
+                        throw err;
+                    return done(null, user);
+                });
+
+            }
+
+        });
+    }));
 };
